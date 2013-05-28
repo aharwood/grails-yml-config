@@ -1,0 +1,4 @@
+nested:
+  property-zero: test0
+  nested:
+    property-one: test1
