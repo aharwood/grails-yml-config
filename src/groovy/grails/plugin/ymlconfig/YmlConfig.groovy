@@ -21,7 +21,9 @@ class YmlConfig {
             ymlConfig = [:]
         }
 
-        this.config.putAll(ymlConfig)
+        if (ymlConfig) {
+            this.config.putAll(ymlConfig)
+        }
     }
 
     def readYml(File ymlFile) {

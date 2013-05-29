@@ -52,6 +52,12 @@ class YmlConfigTest {
         ymlConfig.init()
     }
 
+    @Test
+    void emptyYmlFileShouldDoNothing() {
+        YmlConfig ymlConfig = newYmlConfig("test/unit/resources/empty.yml")
+        ymlConfig.init()
+    }
+
     YmlConfig newYmlConfig(String ymlPath) {
         YmlConfig ymlConfig = new YmlConfig(ymlFilePath: ymlPath)
         ymlConfig.config = grailsApplication.config
