@@ -8,18 +8,11 @@ class YmlConfig {
     def config
     def log
 
-    public YmlConfig() {
-        String hello = "world"
-    }
-
     void init() {
         def ymlConfig = null
-        File ymlfile = new File(this.ymlFilePath)
-        if (ymlfile.exists()) {
-            ymlfile.withReader { reader ->
-                Yaml yaml = new Yaml()
-                ymlConfig = yaml.load(reader)
-            }
+        File ymlFile = new File(this.ymlFilePath)
+        if (ymlFile.exists()) {
+            ymlConfig = readYml(ymlFile)
         } else if (!config.grails.plugin.ymlconfig.containsKey("failOnError") ||
                    config.grails.plugin.ymlconfig.failOnError) {
             throw new FileNotFoundException("Could not find yml file: $ymlFilePath")
@@ -29,5 +22,14 @@ class YmlConfig {
         }
 
         this.config.putAll(ymlConfig)
+    }
+
+    def readYml(File ymlFile) {
+        def ymlConfig = null
+        ymlFile.withReader { reader ->
+            Yaml yaml = new Yaml()
+            ymlConfig = yaml.load(reader)
+        }
+        ymlConfig
     }
 }
