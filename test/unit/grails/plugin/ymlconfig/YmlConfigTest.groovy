@@ -14,7 +14,7 @@ class YmlConfigTest {
     @Before
     void setup() {
         this.grailsApplication = new DefaultGrailsApplication()
-        this.grailsApplication.config =  new ConfigSlurper().parse("")
+        this.grailsApplication.config = [:]
     }
 
     @Test
