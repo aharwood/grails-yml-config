@@ -8,6 +8,7 @@ After installing the plugin, all you need to do is specify the following in your
 ```
 grails.plugin.ymlconfig.filePath = "path/to/config.yml"
 ```
+or rely on the default of grails-app/conf/config.yml.
 
 The plugin will then read this yml file and inject the properties into the grails configuration (e.g. accessible under grailsApplication.config). This will happen before any spring beans are loaded,
 so you can use the values in the yml file to configure them.
