@@ -21,15 +21,15 @@ class YmlConfigTest {
     void rootLevelPropertiesShouldBeSetIntoGrailsConfig() {
         YmlConfig ymlConfig = newYmlConfig("test/unit/resources/singlePropertyTest.yml")
         ymlConfig.init()
-        assertEquals("test", ymlConfig.grailsApplication.config.baseProperty)
+        assertEquals("test", ymlConfig.config.baseProperty)
     }
 
     @Test
     void nestedPropertiesShouldBeSetIntoGrailsConfig() {
         YmlConfig ymlConfig = newYmlConfig("test/unit/resources/nestedPropertyTest.yml")
         ymlConfig.init()
-        assertEquals("test0", ymlConfig.grailsApplication.config.nested."property-zero")
-        assertEquals("test1", ymlConfig.grailsApplication.config.nested.nested."property-one")
+        assertEquals("test0", ymlConfig.config.nested."property-zero")
+        assertEquals("test1", ymlConfig.config.nested.nested."property-one")
     }
 
     @Test(expected = FileNotFoundException)
@@ -41,20 +41,20 @@ class YmlConfigTest {
     @Test
     void nonExistentFileShouldNotThrowExceptionIfConfiguredNotTo() {
         YmlConfig ymlConfig = newYmlConfig("fail.yml")
-        ymlConfig.grailsApplication.config.grails.plugin.ymlconfig.failOnError = false
+        ymlConfig.config.grails.plugin.ymlconfig.failOnError = false
         ymlConfig.init()
     }
 
     @Test(expected = FileNotFoundException)
     void nonExistentFileShouldThrowExceptionIfConfiguredTo() {
         YmlConfig ymlConfig = newYmlConfig("fail.yml")
-        ymlConfig.grailsApplication.config.grails.plugin.ymlconfig.failOnError = true
+        ymlConfig.config.grails.plugin.ymlconfig.failOnError = true
         ymlConfig.init()
     }
 
     YmlConfig newYmlConfig(String ymlPath) {
         YmlConfig ymlConfig = new YmlConfig(ymlFilePath: ymlPath)
-        ymlConfig.grailsApplication = grailsApplication
+        ymlConfig.config = grailsApplication.config
         ymlConfig.log = new Logger()
         ymlConfig
     }

@@ -5,8 +5,12 @@ import org.yaml.snakeyaml.Yaml
 class YmlConfig {
 
     def ymlFilePath
-    def grailsApplication
+    def config
     def log
+
+    public YmlConfig() {
+        String hello = "world"
+    }
 
     void init() {
         def ymlConfig = null
@@ -16,14 +20,14 @@ class YmlConfig {
                 Yaml yaml = new Yaml()
                 ymlConfig = yaml.load(reader)
             }
-        } else if (!grailsApplication.config.grails.plugin.ymlconfig.containsKey("failOnError") ||
-                   grailsApplication.config.grails.plugin.ymlconfig.failOnError) {
+        } else if (!config.grails.plugin.ymlconfig.containsKey("failOnError") ||
+                   config.grails.plugin.ymlconfig.failOnError) {
             throw new FileNotFoundException("Could not find yml file: $ymlFilePath")
         } else {
             log.warn("Could not find yml file at $ymlFilePath")
             ymlConfig = [:]
         }
 
-        this.grailsApplication.config.putAll(ymlConfig)
+        this.config.putAll(ymlConfig)
     }
 }

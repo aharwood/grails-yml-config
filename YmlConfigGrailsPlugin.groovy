@@ -22,8 +22,12 @@ inside that yml file into the Grails Config.
     def scm = [ url: "https://github.com/aharwood/grails-yml-config" ]
 
     def doWithSpring = {
-        ymlConfig(YmlConfig) { bean ->
-            bean.initMethod = "init"
-        }
+        //NOTE: this is created explicitly here and not as a spring bean. This is to ensure the config is updated now,
+        //before applications beans are created in resources.groovy (so that those beans can use the configuration from
+        //the yml file).
+        def ymlConfig = new YmlConfig(config: application.config,
+                                      log: log,
+                                      ymlFilePath: application.config.grails.plugin.ymlconfig.filePath)
+        ymlConfig.init()
     }
 }
