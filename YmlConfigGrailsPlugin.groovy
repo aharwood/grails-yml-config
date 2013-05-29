@@ -24,7 +24,7 @@ inside that yml file into the Grails Config.
         //the yml file).
         def ymlConfig = new YmlConfig(config: application.config,
                                       log: log,
-                                      ymlFilePath: application.config.grails.plugin.ymlconfig.filePath)
+                                      ymlFilePath: application.config.grails.plugin.ymlconfig.filePath ?: 'grails-app/conf/config.yml')
         ymlConfig.init()
     }
 }
