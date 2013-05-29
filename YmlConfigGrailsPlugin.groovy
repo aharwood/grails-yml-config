@@ -1,7 +1,7 @@
 import grails.plugin.ymlconfig.YmlConfig
 
 class YmlConfigGrailsPlugin {
-    def version = "0.1"
+    def version = "1.0"
     def grailsVersion = "2.2 > *"
     def pluginExcludes = []
 
