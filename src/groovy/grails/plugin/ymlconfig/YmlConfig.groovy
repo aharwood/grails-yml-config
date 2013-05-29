@@ -9,7 +9,7 @@ class YmlConfig {
     def log
 
     void init() {
-        def ymlConfig = null
+        def ymlConfig
         File ymlFile = new File(this.ymlFilePath)
         if (ymlFile.exists()) {
             ymlConfig = readYml(ymlFile)
@@ -25,11 +25,6 @@ class YmlConfig {
     }
 
     def readYml(File ymlFile) {
-        def ymlConfig = null
-        ymlFile.withReader { reader ->
-            Yaml yaml = new Yaml()
-            ymlConfig = yaml.load(reader)
-        }
-        ymlConfig
+        ymlFile.withReader { reader -> new Yaml().load(reader) }
     }
 }
